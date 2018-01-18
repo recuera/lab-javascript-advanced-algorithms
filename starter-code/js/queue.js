@@ -19,30 +19,30 @@ $(document).ready(function() {
   function emptyInputAlert() {
     $("#queue-form-group").addClass("has-error");
   }
+});
 
-  $("#add-queue").click(function() {
-    if ($("#queue-elem").val() == "") {
-      emptyInputAlert();
+$("#add-queue").click(function() {
+  if ($("#queue-elem").val() == "") {
+    emptyInputAlert();
+  } else {
+    $("#queue-form-group").removeClass("has-error");
+    var addElem = queue.enqueue($("#queue-elem").val());
+
+    if (addElem == "Queue Overflow") {
+      $("#queue-overflow").removeClass("hidden");
     } else {
-      $("#queue-form-group").removeClass("has-error");
-      var addElem = queue.enqueue($("#queue-elem").val());
-
-      if (addElem == "Queue Overflow") {
-        $("#queue-overflow").removeClass("hidden");
-      } else {
-        $("#queue-underflow").addClass("hidden");
-        updateQueueShowcase(addElem);
-      }
+      $("#queue-underflow").addClass("hidden");
+      updateQueueShowcase(addElem);
     }
-  });
-  $("#remove-queue").click(function() {
-    var removeElem = queue.dequeue();
+  }
+});
+$("#remove-queue").click(function() {
+  var removeElem = queue.dequeue();
 
-    if (removeElem == "Queue Underflow") {
-      $("#queue-underflow").removeClass("hidden");
-    } else {
-      $("#queue-overflow").addClass("hidden");
-      updateQueueShowcase(queue.queueControl);
-    }
-  });
+  if (removeElem == "Queue Underflow") {
+    $("#queue-underflow").removeClass("hidden");
+  } else {
+    $("#queue-overflow").addClass("hidden");
+    updateQueueShowcase(queue.queueControl);
+  }
 });

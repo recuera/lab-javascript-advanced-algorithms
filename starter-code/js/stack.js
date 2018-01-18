@@ -16,29 +16,30 @@ $(document).ready(function() {
     $("#stack-form-group").addClass("has-error");
   }
 
-  $("#add-stack").click(function() {
-    if ($("#stack-elem").val() == "") {
-      emptyInputAlert();
-    } else {
-      $("#stack-form-group").removeClass("has-error");
-      var addElem = stack.push($("#stack-elem").val());
+});
 
-      if (addElem == "Stack Overflow") {
-        $("#stack-overflow").removeClass("hidden");
-      } else {
-        $("#stack-underflow").addClass("hidden");
-        updateStackShowcase(addElem);
-      }
-    }
-  });
-  $("#remove-stack").click(function() {
-    var removeElem = stack.pop();
+$("#add-stack").click(function() {
+  if ($("#stack-elem").val() == "") {
+    emptyInputAlert();
+  } else {
+    $("#stack-form-group").removeClass("has-error");
+    var addElem = stack.push($("#stack-elem").val());
 
-    if (removeElem == "Stack Underflow") {
-      $("#stack-underflow").removeClass("hidden");
+    if (addElem == "Stack Overflow") {
+      $("#stack-overflow").removeClass("hidden");
     } else {
-      $("#stack-overflow").addClass("hidden");
-      updateStackShowcase(stack.stackControl);
+      $("#stack-underflow").addClass("hidden");
+      updateStackShowcase(addElem);
     }
-  });
+  }
+});
+$("#remove-stack").click(function() {
+  var removeElem = stack.pop();
+
+  if (removeElem == "Stack Underflow") {
+    $("#stack-underflow").removeClass("hidden");
+  } else {
+    $("#stack-overflow").addClass("hidden");
+    updateStackShowcase(stack.stackControl);
+  }
 });
